@@ -1,0 +1,40 @@
+@startuml VotingClasses
+abstract class Ballot {
+    - id: UUID
+    + createdAt: LocalDateTime
+}
+class ParliamentBallot {}
+class CandidateBallot {}
+
+Ballot <|-- ParliamentBallot
+Ballot <|-- CandidateBallot
+
+class District {
+    - id: UUID
+    + name: String
+    + addCandidate(c: Candidate): void
+    + removeCandidate(c: Candidate): void
+}
+class Candidate {
+    - id: UUID
+    + name: String
+    + description: String
+}
+class Party {
+    - id: UUID
+    + name: String
+    + description: String
+    + addCandidate(c: Candidate): void
+    + removeCandidate(c: Candidate): void
+}
+
+District "1" -- "0..*" Candidate
+Party "1" o-- "0..*" Candidate
+CandidateBallot "0..*" --> "1" Candidate
+ParliamentBallot "0..*" --> "1" Party
+
+note right of Candidate
+    В одном округе одна партия может
+    выставить только одного кандидата
+end note
+@enduml
