@@ -1,7 +1,7 @@
 package com.example.voting.models.api;
 
-import jakarta.persistence.*;
 import lombok.*;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
@@ -11,11 +11,12 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "districts")
-public class District {
+@Table(name = "parties")
+public class Party {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @Column(nullable = false)
     private String name;
+    private String description;
 }
